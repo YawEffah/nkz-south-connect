@@ -1,15 +1,33 @@
 {% extends 'nkz_south_connect/base.html' %}
+{% load static %}
+{% block title %} Projects | Nkz South Connect {% endblock %}
 
-{% block title %} Projects | Nkz South Connect {% enblock %}
+{% block nav-items %}
+    <li class="nav-item">
+    <a class="nav-link" href="{% url 'nkz_south_connect:about_us' %}">
+        <i class="fa fa-info-circle nav-icon"></i> About</a>
+    </li>
+    <li class="nav-item">
+    <a class="nav-link" href="{% url 'nkz_south_connect:about_us' %}">
+        <i class="fa fa-users nav-icon"></i> Executives</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="{% url 'nkz_south_connect:news' %}">
+        <i class="fa fa-newspaper-o nav-icon"></i> News</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link active" href="#">
+        <i class="fa fas fa-project-diagram nav-icon"></i> Projects</a>
+    </li>
+{% endblock %}
 
 {% block content %}
     <!-- Hero section -->
-     <div class="hero-sec">
-        <div class="container">
-            <h1 class="text-center">Our Projects</h1>
-        </div>
-     </div>
-
+    <div class="hero-sec">
+    <div class="container">
+        <h1 class="text-center">Our Projects</h1>
+    </div>
+    </div>
 
 <main class="main">
    <!-- Projects Section -->
@@ -50,7 +68,7 @@
                     </div>
                 </div>
                 {% empty %}
-                    <h5 class="text-center alert alert-warning">No project(s) available</h5>
+                    <p class="text-center alert alert-warning">No project(s) available</p>
                 {% endfor %}
             </div>
         </div>
