@@ -15,8 +15,17 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
+from django.conf import settings
+from django.conf.urls.static import static
+from nkz_south_connect import views as index_views
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path('', index_views.index, name='index'),
+    path('admin', admin.site.urls),
+    path('nkz-south-connect/', include('nkz_south_connect.urls')),
+    path('connect-admin/', include('connect_admin.urls')),
 ]
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
