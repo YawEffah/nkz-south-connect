@@ -1,0 +1,60 @@
+{% extends 'nkz_south_connect/base.html' %}
+
+{% block title %} Projects | Nkz South Connect {% enblock %}
+
+{% block content %}
+    <!-- Hero section -->
+     <div class="hero-sec">
+        <div class="container">
+            <h1 class="text-center">Our Projects</h1>
+        </div>
+     </div>
+
+
+<main class="main">
+   <!-- Projects Section -->
+   <div class="main-projects-wrap custom-container" id="projects">
+        <div class="container text-center">
+            <!-- <div class="heading">
+                <h2>Our Projects</h2>
+                <div class="underline scroll-animation"></div>
+            </div>
+            <br> -->
+            <br>
+            <div class="projects">
+                {% for project in projects %}
+                <div class="project-item">
+                    {% with main_image=project.images.all|first %}
+                    <img src="{% if main_image %}{{ main_image.image.url }}{% else %}/static/images/default-project.png{% endif %}" 
+                         alt="{{ project.name }}" 
+                         class="project-image">
+                    {% endwith %}
+                    <div class="project-info">
+                        <p class="date-tag tag text-start">
+                            <i class="fa fa-calendar date-icon"></i> {{ project.date|default:"Not specified" }}
+                        </p>
+                        <a href="{% url 'nkz_south_connect:project_details' project.name %}">
+                            <h4>{{ project.name }}</h4>
+                        </a>
+                        <!-- <p>
+                            {{ project.description|default:"Not specified" }}
+                        </p> -->
+                        <div class="tags-grid">
+                            <p class="tag">
+                                <i class="fa fa-map-marker"></i> Location: {{ project.location|default:"Not specified" }}
+                            </p>
+                            <p class="tag">
+                                <i class="fas fa-circle-notch"></i> Status: {{ project.status|default:"Not specified" }}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                {% empty %}
+                    <h5 class="text-center alert alert-warning">No project(s) available</h5>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</main>
+{% endblock %}
+     

@@ -1,0 +1,307 @@
+{% extends 'nkz_south_connect/base.html' %}
+
+{% block title %} Project | Nkz South Connect {% endblock %}
+
+{% block content %}
+    
+<main class="main">
+    <!-- Project details section -->
+    <div class="project-details container custom-container">
+        <div id="projectCarousel-{{ project.id }}" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner">
+                {% with images=project.images.all %}
+                    {% if images %}
+                        {% for image in images|slice:":4" %}
+                            <div class="carousel-item {% if forloop.first %}active{% endif %}">
+                                <img src="{{ image.image.url }}" class="d-block w-100" alt="{{ project.name }} image {{ forloop.counter }}">
+                            </div>
+                        {% endfor %}
+                    {% else %}
+                        <div class="carousel-item active">
+                            <img src="/static/images/default-project.png" class="d-block w-100" alt="Default Project Image">
+                        </div>
+                    {% endif %}
+                {% endwith %}
+            </div>
+            {% if project.images.count > 1 %}
+                <button class="carousel-control-prev" type="button" data-bs-target="#projectCarousel-{{ project.id }}" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon"></span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#projectCarousel-{{ project.id }}" data-bs-slide="next">
+                    <span class="carousel-control-next-icon"></span>
+                </button>
+            {% endif %}
+        </div>
+        <article class="project-content">
+            <p class="date-tag tag text-start">
+                <i class="fa fa-calendar date-icon"></i> {{ project.date|default:"Not specified" }}
+            </p>
+            <h1>{{ project.name }}</h1>
+            <p>{{ project.description }}</p>
+            <div class="tags-grid">
+                <p class="tag">
+                    <i class="fa fa-map-marker"></i> Location: {{ project.location|default:"Not specified" }}
+                </p>
+                <p class="tag">
+                    <i class="fas fa-circle-notch"></i> Status: {{ project.status|default:"Not specified" }}
+                </p>
+            </div>
+        </article>
+    </div>
+
+    <!-- Comments Section with Responsive Scroll-Snap -->
+    <div class="comments-section container custom-container mt-5">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h3 class="mb-0">Feedback</h3>
+            <button class="btn cta-btn add-comment-btn" data-bs-toggle="modal" data-bs-target="#addCommentModal">
+                <i class="fas fa-plus me-2"></i>Add Comment
+            </button>
+        </div>
+        
+        <!-- Scroll-Snap Container -->
+        <div class="comments-scroll-container">
+            <!-- Each comment is now its own snap point -->
+            {% for comment in comments %}
+            <div class="comment-card" role="group" aria-label="Comment 1 of 6">
+                <div class="comment-header">
+                    <img src="{% static 'nkz_south_connect/images/user-avatar.png' %}" alt="User avatar" class="comment-avatar">
+                    <div class="comment-meta">
+                        <h3 class="comment-author">{{ comment.name }}</h3>
+                        <p class="comment-date">
+                            <i class="fa fa-calendar" aria-hidden="true"></i> {{ comment.date|date:"F j, Y" }}
+                        </p>
+                    </div>
+                </div>
+                <div class="comment-body">
+                    {% if comment.rating %}
+                    <div class="mb-2">
+                        {{ comment.get_stars }}
+                    </div>
+                    {% endif %}
+                    <p>
+                       {{ comment.content|default:"No comment provided" }}
+                    </p>
+                </div>
+            </div>
+            {% empty %}
+                <div class="alert alert-warning">No comments available</div>
+            {% endfor %}
+        <!-- Additional comments... -->
+    </div>
+    
+     <!-- Scroll indicators and navigation buttons -->
+     <div class="d-flex justify-content-center align-items-center mt-3">
+        <button class="btn btn-sm btn-outline-secondary scroll-nav prev-comment" aria-label="Previous comments">
+            <i class="fas fa-chevron-left"></i>
+        </button>
+        
+        <div class="scroll-indicators mx-3">
+            <!-- Indicators will be added by JS -->
+        </div>
+        
+        <button class="btn btn-sm btn-outline-secondary scroll-nav next-comment" aria-label="Next comments">
+            <i class="fas fa-chevron-right"></i>
+        </button>
+    </div>
+</div>
+
+    <!-- Add Comment Modal -->
+    <div class="modal fade" id="addCommentModal" tabindex="-1" aria-labelledby="addCommentModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addCommentModalLabel">Add Your Feedback</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form method="POST" id="commentForm" class="comment-form">
+                        {% csrf_token %}
+                        {% for field in form %}
+                            {% if field.name != 'rating' %}
+                            <div class="mb-3">
+                                {{ field.label_tag }}
+                                {{ field }}
+                                {{ field.errors }}
+                            </div>
+                            {% endif %}
+                        {% endfor %}
+                        
+                        <div class="mb-3">
+                            <label class="form-label">Rating (optional)</label>
+                            <div class="rating-input mb-2">
+                                {% for i in "12345" %}
+                                <i class="far fa-star rating-star" data-rating="{{ i }}" 
+                                   style="cursor: pointer; font-size: 1.5rem; margin-right: 5px;"></i>
+                                {% endfor %}
+                                {{ form.rating }}
+                            </div>
+                            <small class="text-muted">Click stars to rate from 1 (worst) to 5 (best)</small>
+                        </div>
+                        
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancel</button>
+                            <button type="submit" class="btn cta-btn submit-comment-btn"><i class="fa fa-paper-plane"></i> Submit</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Commend ends here -->
+
+
+    <hr class="container">
+    <!-- More Projects section -->
+    <div class="main-projects-wrap  container custom-container" id="news">
+        <h1>More Projects</h1>
+        <div class="text-center">
+            <br>
+            <div class="projects">
+                {% for project in projects %}
+                <div class="project-item">
+                    {% with main_image=project.images.all|first %}
+                    <img src="{% if main_image %}{{ main_image.image.url }}{% else %}/static/images/default-project.png{% endif %}" 
+                        alt="{{ project.name }}" 
+                        class="project-image">
+                    {% endwith %}
+                    <div class="project-info">
+                        <p class="date-tag tag text-start">
+                            <i class="fa fa-calendar date-icon"></i> {{ project.date|default:"Not specified" }}
+                        </p>
+                        <a href="{% url 'nkz_south_connect:project_details' project.name %}">
+                            <h4>{{ project.name }}</h4>
+                        </a>
+                        <!-- <p>
+                            {{ project.description|default:"Not specified" }}
+                        </p> -->
+                        <div class="tags-grid">
+                            <p class="tag">
+                                <i class="fa fa-map-marker"></i> Location: {{ project.location|default:"Not specified" }}
+                            </p>
+                            <p class="tag">
+                                <i class="fas fa-circle-notch"></i> Status: {{ project.status|default:"Not specified" }}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                {% empty %}
+                    <h5 class="text-center alert alert-warning">No project(s) available</h5>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</main>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const stars = document.querySelectorAll('.rating-star');
+        const ratingInput = document.getElementById('id_rating');
+        
+        // Initialize with existing rating if present
+        if (ratingInput && ratingInput.value > 0) {
+            highlightStars(ratingInput.value);
+        }
+        
+        // Star click handler
+        stars.forEach(star => {
+            star.addEventListener('click', function() {
+                const rating = this.getAttribute('data-rating');
+                ratingInput.value = rating;
+                highlightStars(rating);
+            });
+        });
+        
+        function highlightStars(rating) {
+            stars.forEach(star => {
+                if (star.getAttribute('data-rating') <= rating) {
+                    star.classList.add('fas', 'active');
+                    star.classList.remove('far');
+                } else {
+                    star.classList.add('far');
+                    star.classList.remove('fas', 'active');
+                }
+            });
+        }
+    });
+
+  
+// Snap-to-scroll functionality
+// This script enables a responsive scroll-snap feature for the comments section, 
+// allowing users to navigate through comments using buttons and indicators.
+    document.addEventListener('DOMContentLoaded', function() {
+    const container = document.querySelector('.comments-scroll-container');
+    const commentCards = document.querySelectorAll('.comment-card');
+    const prevBtn = document.querySelector('.prev-comment');
+    const nextBtn = document.querySelector('.next-comment');
+    const indicatorsContainer = document.querySelector('.scroll-indicators');
+    
+    // Create indicators
+    function createIndicators() {
+        indicatorsContainer.innerHTML = '';
+        const visibleCards = getVisibleCardCount();
+        const indicatorCount = Math.ceil(commentCards.length / visibleCards);
+        
+        for (let i = 0; i < indicatorCount; i++) {
+            const indicator = document.createElement('button');
+            indicator.className = 'scroll-indicator' + (i === 0 ? ' active' : '');
+            indicator.setAttribute('aria-label', `View comments ${i*visibleCards + 1} to ${Math.min((i+1)*visibleCards, commentCards.length)}`);
+            indicator.addEventListener('click', () => scrollToIndex(i));
+            indicatorsContainer.appendChild(indicator);
+        }
+    }
+    
+    // Get number of visible cards based on screen size
+    function getVisibleCardCount() {
+        if (window.matchMedia('(min-width: 992px)').matches) return 3;
+        if (window.matchMedia('(min-width: 576px)').matches) return 2;
+        return 1;
+    }
+    
+    // Scroll to specific index
+    function scrollToIndex(index) {
+        const visibleCards = getVisibleCardCount();
+        const cardWidth = commentCards[0].offsetWidth + parseInt(getComputedStyle(container).gap);
+        container.scrollTo({
+            left: cardWidth * visibleCards * index,
+            behavior: 'smooth'
+        });
+    }
+    
+    // Update active indicator
+    function updateIndicators() {
+        const cardWidth = commentCards[0].offsetWidth + parseInt(getComputedStyle(container).gap);
+        const scrollPosition = container.scrollLeft;
+        const visibleCards = getVisibleCardCount();
+        const activeIndex = Math.round(scrollPosition / (cardWidth * visibleCards));
+        
+        document.querySelectorAll('.scroll-indicator').forEach((indicator, index) => {
+            indicator.classList.toggle('active', index === activeIndex);
+        });
+    }
+    
+    // Navigation buttons
+    prevBtn.addEventListener('click', () => {
+        container.scrollBy({
+            left: -container.offsetWidth,
+            behavior: 'smooth'
+        });
+    });
+    
+    nextBtn.addEventListener('click', () => {
+        container.scrollBy({
+            left: container.offsetWidth,
+            behavior: 'smooth'
+        });
+    });
+    
+    // Initialize
+    createIndicators();
+    container.addEventListener('scroll', updateIndicators);
+    window.addEventListener('resize', () => {
+        createIndicators();
+        updateIndicators();
+    });
+});
+ </script>    
+{% endblock %}
+    

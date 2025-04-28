@@ -1,0 +1,44 @@
+{% extends 'nkz_south_connect/base.html' %}
+
+
+
+{% block title %} News | NDC NKZ South {% endblock %} 
+{% block content %}
+    <!-- Hero section -->
+     <div class="hero-sec">
+        <div class="container">
+            <h1 class="text-center">News Update</h1>
+        </div>
+     </div>
+
+
+<main class="main">
+    <!-- News section -->
+    <div class="news-wrap custom-container" id="news">
+        <div class="container text-center">
+            <br>
+            <div class="row news">
+                <!-- News 1 -->
+                 {% for news in current_news %}
+                    <div class="news-item text-center">
+                        {% if news.image %}
+                            <img src="{{ news.image.url }}" alt="{{ news.title }}" class="img-fluid mb-3">
+                        {% else %}
+                            <img src="/static/images/default-profile.png" alt="Default Image" class="img-fluid mb-3">
+                        {% endif %}
+                        <div class="news-info">
+                            <p class="date-tag text-start">
+                               {{ news.date }}
+                            </p>
+                            <a href="{% url 'nkz_south_connect:news_details' news.title %}"><p>{{ news.title }}</p></a>
+                        </div>
+                    </div>
+                    {% empty %}
+                        <h5 class="text-center alert alert-warning">No news available</h5>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+  </main>
+  {% endblock %}
+     

@@ -1,0 +1,205 @@
+{% extends 'nkz_south_connect/base.html' %}
+
+{% block title %} Home | Nkz South Connect {% endblock %}
+
+{% block content %}
+    <!-- Images Carousel Section Starts Here -->
+    <div id="carouselClinicImagesIndicators" class="carousel slide carousel-images" data-bs-ride="true">
+        <div class="carousel-indicators">
+          <button type="button" data-bs-target="#carouselClinicImagesIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+          <button type="button" data-bs-target="#carouselClinicImagesIndicators" data-bs-slide-to="1" aria-label="Slide 1"></button>
+          <button type="button" data-bs-target="#carouselClinicImagesIndicators" data-bs-slide-to="2" aria-label="Slide 2"></button>
+        </div>
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <img src="{% static 'nkz_south_connect/images/24HrEconomy_4-1920x_.png' %}" class="d-block w-100" alt="...">
+          </div>
+          <div class="carousel-item">
+            <img src="{% static 'nkz_south_connect/images/Trustworthy_1-1920x_.png' %}" class="d-block w-100" alt="...">
+          </div>
+          <div class="carousel-item">
+            <img src="{% static 'nkz_south_connect/images/WDB_1-1920x_.png' %}" class="d-block w-100" alt="...">
+          </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselClinicImagesIndicators" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselClinicImagesIndicators" data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+    </div>
+
+    <!-- About section -->
+    <div class="about-wrap custom-container" id="about-us">
+    <div class="container">
+        <div class="row about-container">
+            <div class="col-md-6">
+                <div class="summary-item">
+                    <h2 class="scroll-animation">{{ education_projects }}</h2>
+                    <p>Schools completed</p>
+                </div>
+                <div class="summary-item">
+                    <h2 class="scroll-animation">{{ scholarships }}</h2>
+                    <p>Scholarships awarded</p>
+                </div>
+                <div class="summary-item">
+                    <h2 class="scroll-animation">{{ health_projects }}</h2>
+                    <p>Hospitals completed</p>
+                </div>
+                <div class="summary-item">
+                    <h2 class="scroll-animation">{{ other_projects }}</h2>
+                    <p>Other projects completed</p>
+                </div> 
+                <br>               
+            </div>
+            <div class="col-md-6">
+                <div class="about-content">
+                    <h2>About Us</h2>
+                    <p>
+                        The National Democratic Congress is a social democratic political party in Ghana, 
+                        founded by Jerry Rawlings, who was Head of State in Ghana from 1981 to 1993. He became 
+                        the President of Ghana from 1993 to 2001
+                    </p>
+                </div>
+                <br>
+                <a href="{% url 'nkz_south_connect:about_us' %}" class="cta-btn scroll-animation">Read More</a>
+            </div>
+        </div>  
+    </div>
+   </div>
+
+<main class="main">
+   <!-- Executives Section -->
+    <div class="executives-wrap custom-container" id="executives">
+        <div class="container text-center">
+            <div class="heading">
+                <h2>Meet Our Executives</h2>
+                <div class="underline scroll-animation"></div>
+            </div>
+            <br>
+            <br>
+                <div class="row executives">
+                    {% for executive in executives %}
+                        <div class="col-md-6 h-100 col-lg-4 mb-4">
+                            <div class="executive text-center">
+                                {% if executive.image %}
+                                    <img src="{{ executive.image.url }}" alt="{{ executive.name }}" class="img-fluid mb-3">
+                                {% else %}
+                                    <img src="/static/images/default-profile.png" alt="Default Image" class="img-fluid mb-3">
+                                {% endif %}
+                                <div class="executive-info">
+                                    <h5>{{ executive.name|default:"N/A" }}</h5>
+                                    <p>{{ executive.position|default:"Not specified" }}</p>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+                <br>
+                <a href="{% url 'nkz_south_connect:about_us' %}" class="cta-btn cta-secondary scroll-animation">See All</a>
+        </div>
+    </div>
+    <br>
+    <br>
+    <!-- Video Wrap -->
+    <div class="container video-wrap custom-container">
+        <!-- YouTube Video Embed -->
+        <div>
+            <iframe class="video"
+            src="https://www.youtube.com/embed/HnB-LPrjmSM?si=YAI2_2zoEb3yMMrr" 
+            title="YouTube video player" frameborder="0" 
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+            referrerpolicy="strict-origin-when-cross-origin" 
+            allowfullscreen>
+        </iframe>
+        </div>
+        <!-- Video Description -->
+        <div class="video-description">
+            <h3>
+                Nkoranza South MP Condemns Use of Live Bullets on Protesters.<br>
+                Calling it an abuse of power. 
+                He demands an investigation and accountability
+            </h3> 
+        </div>
+    </div>
+    <!-- News section -->
+    <div class="news-wrap custom-container" id="news">
+        <div class="container text-center">
+            <h2 class="text-start">News</h2>
+            <br>
+            <br>
+            <div class="row news">
+                <!-- News 1 -->
+                 {% for news in current_news %}
+                    <div class="news-item text-center">
+                        {% if news.image %}
+                            <img src="{{ news.image.url }}" alt="{{ news.title }}" class="img-fluid mb-3">
+                        {% else %}
+                            <img src="/static/images/default-profile.png" alt="Default Image" class="img-fluid mb-3">
+                        {% endif %}
+                        <div class="news-info">
+                            <p class="date-tag text-start">
+                               {{ news.date }}
+                            </p>
+                            <a href="{% url 'nkz_south_connect:news_details' news.title %}"><p>{{ news.title }}</p></a>
+                        </div>
+                    </div>
+                    {% empty %}
+                        <h5 class="text-center alert alert-warning">No news available</h5>
+                {% endfor %}
+            </div>
+            <br><br>
+            <a href="{% url 'nkz_south_connect:news' %}" class="cta-btn cta-secondary scroll-animation">Sell All</a>
+        </div>
+    </div>
+    <!-- Projects Section -->
+    <div class="projects-wrap custom-container" id="projects">
+            <div class="container text-center">
+                <div class="heading">
+                    <h2>Our Projects</h2>
+                    <div class="underline scroll-animation"></div>
+                </div>
+                <br>
+                <br>
+                <div class="projects">
+                    {% for project in projects %}
+                    <div class="project-item">
+                        {% with main_image=project.images.all|first %}
+                        <img src="{% if main_image %}{{ main_image.image.url }}{% else %}/static/images/default-project.png{% endif %}" 
+                            alt="{{ project.name }}" 
+                            class="project-image">
+                        {% endwith %}
+                        <div class="project-info">
+                            <p class="date-tag tag text-start">
+                                <i class="fa fa-calendar date-icon"></i> {{ project.date|default:"Not specified" }}
+                            </p>
+                            <a href="{% url 'nkz_south_connect:project_details' project.name %}">
+                                <h4>{{ project.name }}</h4>
+                            </a>
+                            <!-- <p>
+                                {{ project.description|default:"Not specified" }}
+                            </p> -->
+                            <div class="tags-grid">
+                                <p class="tag">
+                                    <i class="fa fa-map-marker"></i> Location: {{ project.location|default:"Not specified" }}
+                                </p>
+                                <p class="tag">
+                                    <i class="fas fa-circle-notch"></i> Status: {{ project.status|default:"Not specified" }}
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    {% empty %}
+                        <h5 class="text-center alert alert-warning">No project(s) available</h5>
+                    {% endfor %}
+                </div>
+                <br><br>
+                <a href="{% url 'nkz_south_connect:projects' %}" class="cta-btn cta-secondary scroll-animation">See More</a>
+            </div>
+        </div>
+    </div>
+</main>
+{% endblock %}
+    

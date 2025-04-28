@@ -1,0 +1,112 @@
+{% extends 'nkz_south_connect/base.html' %}
+
+
+{% block title %} About Us | Nkz South Connect {% endlock %}
+       
+
+{% block content %}
+    <!-- Hero section -->
+     <div class="hero-sec">
+        <div class="container">
+            <h1 class="text-center">About Us</h1>
+        </div>
+     </div>
+    <!-- About section -->
+    <div class="main-about-wrap" id="about-us">
+        <div class="container main-about-container">
+            <div class="about-img">
+                <img src="{% static 'nkz_south_connect/images/logo_1.png' %}" alt="NDC Logo" class="img-fluid">         
+            </div>
+                <div class="about-article">
+                    <h2>Our History</h2>
+                    <article>
+                        <p>
+                            The National Democratic Congress (NDC) is a social democratic political party in Ghana, 
+                            founded by Jerry Rawlings, who was Head of State in Ghana from 1981 to 1993. He became the 
+                            President of Ghana from 1993 to 2001. Following the formation of the Provisional National 
+                            Defence Council (PNDC), which ruled Ghana following the military coup d'état on 31 December 1981,
+                            there was pressure from the international community to restore democracy. The NDC was formed as 
+                            the ruling party ahead of elections in 1992, in which Rawlings was elected president, and in 1996 
+                            Rawlings was re-elected as the NDC candidate. Rawlings' second term ended in 2001.
+                            The NDC lost the presidency in the 2000 election, and it was not until the 2008 election, that they 
+                            regained it with John Atta Mills as its candidate. They established the 1992 constitution of Ghana.
+                        </p>
+                        
+                        <p>
+                            The NDC party symbol is an umbrella with the head of a dove at the tip. The party colors are red, white, green, 
+                            and black, with the party slogan or motto as "Unity, stability, and development." Internationally, the NDC is a 
+                            member of the Progressive Alliance and Socialist International. <br>               
+                            On 9 December 2012, the Electoral Commission of Ghana declared NDC candidate John Dramani Mahama to be president-elect 
+                            after a hotly contested race in which he won 50.7% of the votes cast.
+                        </p>
+                        
+                    </article>
+                </div>
+        </div>  
+   </div>
+
+<main class="main">
+   <!-- Executives Section -->
+    <div class="executives-wrap custom-container" id="executives">
+        <div class="container text-center">
+            <div class="heading">
+                <h2>Meet Our Executives</h2>
+                <div class="underline scroll-animation"></div>
+            </div>
+            <br>
+            <br>
+                <div class="row executives">
+                    {% for executive in executives %}
+                        <div class="col-md-6 h-100 col-lg-4 mb-4">
+                            <div class="executive text-center">
+                                {% if executive.image %}
+                                    <img src="{{ executive.image.url }}" alt="{{ executive.name }}" class="img-fluid mb-3">
+                                {% else %}
+                                    <img src="/static/images/default-profile.png" alt="Default Image" class="img-fluid mb-3">
+                                {% endif %}
+                                <div class="executive-info">
+                                    <h5>{{ executive.name|default:"N/A" }}</h5>
+                                    <p>{{ executive.position|default:"Not specified" }}</p>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+        </div>
+    </div>
+
+   <div class="text-center">
+    <!-- Button trigger modal -->
+    <button type="button" class="btn cta-btn scroll-animation" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+      Become A Member
+    </button>
+   </div>
+   
+    <!-- Modal -->
+    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+            <h1 class="modal-title fs-5" id="staticBackdropLabel">Apply for Membership</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+               <ul>
+                    <li>Fill out the membership form</li>
+                    <li>Submit the form to your local party office</li>
+                    <li>Wait for confirmation of your membership</li>
+                    <li>Attend local meetings and events</li>
+                    <li>Engage with other members and participate in party activities</li>
+                    <li>Stay informed about party policies and initiatives</li>
+                    <li>Contribute to the party's goals and objectives</li>
+               </ul>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+        </div>
+    </div>
+</main>
+{% endblock %}
+    
