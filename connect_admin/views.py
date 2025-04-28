@@ -135,7 +135,18 @@ def members_dashboard(request):
         if form.is_valid():
             print(form)
             form.save()
+            messages.success(request, 'Member added successfully')
             return redirect(reverse('connect_admin:members'))
+        else:
+            messages.error(request, 'An error occurred. Please try again')
+            return render(request, 'connect_admin/members_dashboard.html', {
+               'form': form,
+                'members': members_query,
+                'total_members': statistics['total_members'],
+                'number_of_males': statistics['number_of_males'],
+                'number_of_females': statistics['number_of_females'],
+                'member_id_filter': member_id,  # Include for template reference
+            })
     else:
         form = MemberForm()
 

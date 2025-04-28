@@ -106,7 +106,7 @@ class Member(models.Model):
             ('pending', 'pending'),
             ('accepted', 'accepted'),
             ('declined', 'declined'),
-        ), max_length=100, default='pending'
+        ), max_length=100, default='accepted'
     )
     picture = models.ImageField(upload_to='members/')
     date_of_birth = models.DateField()

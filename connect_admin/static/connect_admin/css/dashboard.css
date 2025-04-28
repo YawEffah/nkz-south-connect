@@ -251,7 +251,6 @@ body {
 
 
 
-
 /* Modal styles */
 .custom-modal {
     display: none;
@@ -801,6 +800,13 @@ footer .socials span{
     justify-content: space-between;
     margin: 20px 0;
 }
+
+.errorlist li{
+    color: red;
+    font-size: 12px;
+    margin-top: 5px;
+}
+
 
 /* Responsive Media Queries for Tablet */
 @media screen and (min-width: 768px) {
