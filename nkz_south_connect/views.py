@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from connect_admin.models import *
 from django.urls import reverse
 from django.contrib import messages
-from connect_admin.forms import MemberForm, CommentForm
+from connect_admin.forms import CommentForm
 # Create your views here.
 
 
@@ -24,7 +24,7 @@ def index(request):
         'education_projects': education_projects,
         'other_projects': other_projects,
         }
-    return render(request, 'ndc_portal/index.html', context)
+    return render(request, 'nkz_south_connect/index.html', context)
 
 
 def about_us(request):
@@ -34,7 +34,7 @@ def about_us(request):
         'executives': executives,
         }
     
-    return render(request, 'ndc_portal/about_us.html', context)
+    return render(request, 'nkz_south_connect/about_us.html', context)
 
 
 def news(request):
@@ -43,7 +43,7 @@ def news(request):
     context = {
         'current_news': current_news
     }
-    return render(request, 'ndc_portal/news.html', context)
+    return render(request, 'nkz_south_connect/news.html', context)
 
 
 def news_details(request, news_title):
@@ -54,7 +54,7 @@ def news_details(request, news_title):
         'news': news,
         'current_news': current_news
     }
-    return render(request, 'ndc_portal/news_details.html', context)
+    return render(request, 'nkz_south_connect/news_details.html', context)
 
 
 def projects(request):
@@ -63,7 +63,7 @@ def projects(request):
     context = {
         'projects': projects
     }
-    return render(request, 'ndc_portal/projects.html', context)
+    return render(request, 'nkz_south_connect/projects.html', context)
 
 
 def project_details(request, project_name):
@@ -81,7 +81,7 @@ def project_details(request, project_name):
                 comment.rating = None
             comment.save()
             messages.success(request, 'Comment added successfully')
-            return redirect(reverse('ndc_portal:project_details', args=[project_name]))
+            return redirect(reverse('nkz_south_connect:project_details', args=[project_name]))
     else:
         form = CommentForm()
 
@@ -91,4 +91,4 @@ def project_details(request, project_name):
         'form': form,
         'comments': comments,
     }
-    return render(request, 'ndc_portal/project_details.html', context)
+    return render(request, 'nkz_south_connect/project_details.html', context)

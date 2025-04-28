@@ -1,5 +1,9 @@
 {% extends 'nkz_south_connect/base.html' %}
+{% load static %}
 
+
+{% block meta_title %} Nkz South Connect {% endblock %}
+{% block meta_description %} Nkz South Connect {% endblock %}
 {% block title %} Home | Nkz South Connect {% endblock %}
 
 {% block content %}
@@ -147,7 +151,7 @@
                         </div>
                     </div>
                     {% empty %}
-                        <h5 class="text-center alert alert-warning">No news available</h5>
+                        <p class="alert alert-warning text-center">No news available</p>
                 {% endfor %}
             </div>
             <br><br>
@@ -192,7 +196,7 @@
                         </div>
                     </div>
                     {% empty %}
-                        <h5 class="text-center alert alert-warning">No project(s) available</h5>
+                        <p class="alert alert-warning">No project(s) available</p>
                     {% endfor %}
                 </div>
                 <br><br>

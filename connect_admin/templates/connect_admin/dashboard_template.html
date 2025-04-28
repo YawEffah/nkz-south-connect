@@ -1,0 +1,24 @@
+{% extends 'portal_admin/base.html' %} {% block nav-items %}
+<li class="nav-item">
+  <a class="nav-link active" href="{% url 'portal_admin:dashboard' %}"
+    ><i class="fa fa-home nav-icon"></i>Home</a
+  >
+</li>
+<li class="nav-item">
+  <a class="nav-link" href="{% url 'portal_admin:manage_users' %}"
+    ><i class="fa fa-users nav-icon"></i>Manage User</a
+  >
+</li>
+{% endblock %} {% block main-content %}
+<div class="main-application-wrap">
+  <h2 class="scroll-animation">Dashboard</h2>
+  <div class="application-table-wrap custom-table-wrap">
+    <!-- Semester and Level Information-->
+    <div class="info-row"></div>
+    <div class="table-scroll">
+        <h1>Hello Usdr</h1>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
