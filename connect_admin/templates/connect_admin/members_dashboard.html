@@ -1,0 +1,140 @@
+{% extends 'connect_admin/base.html' %}
+
+{% block nav-items %}
+<li class="nav-item">
+  <a class="nav-link" href="{% url 'connect_admin:dashboard' %}">
+    <i class="fa fa-home nav-icon"></i>Home</a>
+</li>
+<li class="nav-item">
+  <a class="nav-link" href="{% url 'connect_admin:news' %}">
+    <i class="fa fa-newspaper-o nav-icon"></i>News</a>
+</li>
+<li class="nav-item">
+  <a class="nav-link" href="{% url 'connect_admin:projects' %}">
+    <i class="fa fas fa-project-diagram nav-icon"></i>Projects</a>
+</li>
+<li class="nav-item">
+  <a class="nav-link active" href="#">
+    <i class="fa fas fa-users nav-icon"></i>Members</a>
+</li>
+{% endblock %}
+
+{% block main-content %}
+<div class="main-help-wrap">
+  <div class="card-statistics-wrap">
+    <div class="card-stats-card">
+      <div class="card-header">
+        <h3 card="card-title">Males</h3>
+        <span><i class="fa fa-male card-icon"></i></span>
+      </div>
+      <div class="card-body">
+        <h2>{{ number_of_males }}</h2>
+      </div>
+    </div>
+    <div class="card-stats-card">
+      <div class="card-header">
+        <h3 card="card-title">Females</h3>
+        <span><i class="fa fa-female card-icon"></i></span>
+      </div>
+      <div class="card-body">
+        <h2>{{ number_of_females }}</h2>
+      </div>
+    </div>
+    <div class="card-stats-card">
+      <div class="card-header">
+        <h3 card="card-title">Total</h3>
+        <span><i class="fa fa-users card-icon"></i></span>
+      </div>
+      <div class="card-body">
+        <h2>{{ total_members }}</h2>
+      </div>
+    </div>
+  </div>
+  <br>
+<br>
+<div class="header-btn-wrap">
+  <!-- Filter Form -->
+  <form method="get" class="filter-form">
+    <div class="filter-input">
+      <input type="text" id="member_id" name="member_id" placeholder="Filter by member ID" value="{{ member_id_filter }}">
+    </div>
+    <button type="submit" class="cta-btn filter-btn">Filter</button>
+  </form>
+
+  <button
+    type="button"
+    id="open-generate-card-modal"
+    class="cta-btn register-cta"
+  >
+    <i class="fa fa-plus"></i> Add a Member
+  </button>  
+  </div>
+
+  <!-- Add Member Modal -->
+  <div id="generateCardModal" class="custom-modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3>Add a Member</h3>
+        <div class="close-nav" id="close-modal">
+          <i class="fa fa-times close-icon"></i>
+        </div>
+      </div>
+      <div class="modal-body">
+        <form method="POST" enctype="multipart/form-data" novalidate class="text-start">
+          {% csrf_token %}
+          {% for field in form %}
+          <div class="form-group">
+            {{ field.label_tag }}
+            {{ field }}
+            {{ field.errors }}
+          </div>
+          {% endfor %}
+          <input type="submit" value="Submit" class="cta-btn form-control">
+        </form>
+      </div>
+    </div>
+  </div>
+
+  
+  <br>
+  <h2 class="scroll-animation">Active Members</h2>
+  <div class="help-table-wrap custom-table-wrap">
+    <div class="info-row"></div>
+    <div class="table-scroll">
+      <table class="help-table custom-table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Contact</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for member in members %}
+          <tr>
+            <td data-label="Id-number">{{ member.member_id }}</td>
+            <td data-label="Name">{{ member.name }}</td>
+            <td data-label="Contact">{{ member.contact }}</td>
+            <td>
+              <div class="action-menu">
+                <i class="fa fa-ellipsis-v action-menu-icon"></i>
+                <div class="action-menu-content">
+                  <a href="{% url 'connect_admin:member_details' member.member_id %}" class="view-btn">
+                    <i class="fa fa-eye action-icon"></i>View</a>
+                </div>
+              </div>
+            </td>
+          </tr>
+          {% empty %}
+          <tr>
+            <td colspan="4">No member available</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

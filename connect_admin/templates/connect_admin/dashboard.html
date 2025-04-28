@@ -1,0 +1,97 @@
+{% extends 'connect_admin/base.html' %}
+
+{% block nav-items %}
+<li class="nav-item">
+  <a class="nav-link active" href="{% url 'connect_admin:dashboard' %}">
+    <i class="fa fa-home nav-icon"></i>Home
+  </a>
+</li>
+<li class="nav-item">
+  <a class="nav-link" href="{% url 'connect_admin:news' %}">
+    <i class="fa fa-newspaper-o nav-icon"></i>News
+  </a>
+</li>
+<li class="nav-item">
+  <a class="nav-link" href="{% url 'connect_admin:projects' %}">
+    <i class="fas fa-project-diagram nav-icon"></i>Projects
+  </a>
+</li>
+<li class="nav-item">
+  <a class="nav-link" href="{% url 'connect_admin:members' %}">
+    <i class="fas fa-users nav-icon"></i>Members
+  </a>
+</li>
+{% endblock %}{% block main-content %}
+<br />
+<h2 class="page-title scroll-animation">Projects Statistics</h2>
+<div class="card-statistics-wrap">
+  <div class="card-stats-card">
+    <div class="card-header">
+      <h3 card="card-title">Completed Projects</h3>
+      <span><i class="fa fa-check-circle card-icon"></i></span>
+    </div>
+    <div class="card-body">
+      <h2>{{ completed_projects }}</h2>
+    </div>
+  </div>
+  <div class="card-stats-card">
+    <div class="card-header">
+      <h3 card="card-title">Ongoing Projects</h3>
+      <span><i class="fa fa-spinner card-icon"></i></span>
+    </div>
+    <div class="card-body">
+      <h2>{{ ongoing_projects }}</h2>
+    </div>
+  </div>
+  <div class="card-stats-card">
+    <div class="card-header">
+      <h3 card="card-title">Total Projects</h3>
+      <span><i class="fa fa-calculator card-icon"></i></span>
+    </div>
+    <div class="card-body">
+      <h2>{{ total_projects }}</h2>
+    </div>
+  </div>
+</div>
+<br>
+<br>
+<h2 class="page-title scroll-animation">Scholarship Statistics</h2>
+<div class="card-statistics-wrap">
+  <div class="card-stats-card">
+    <div class="card-header">
+      <h3 card="card-title">Local Scholarships</h3>
+      <span><i class="fa fa-graduation-cap card-icon"></i></span>
+    </div>
+    <div class="card-body">
+      <h2>{{ local_scholarships }}</h2>
+    </div>
+  </div>
+  <div class="card-stats-card">
+    <div class="card-header">
+      <h3 card="card-title">Foreign Scholarships</h3>
+      <span><i class="fa fa-graduation-cap card-icon"></i></span>
+    </div>
+    <div class="card-body">
+      <h2>{{ foreign_scholarships }}</h2>
+    </div>
+  </div>
+  <div class="card-stats-card">
+    <div class="card-header">
+      <h3 card="card-title">Total Scholarships</h3>
+      <span><i class="fa fa-calculator card-icon"></i></span>
+    </div>
+    <div class="card-body">
+      <h2>{{ total_scholarships }}</h2>
+    </div>
+  </div>
+</div>
+<!-- <br>
+<h2><i class="fa fa-percent stats-icon"></i> Percentage Statistics</h2>
+<hr>
+<div class="percentage_stats-chart">
+  <p>Percentage Sold: <span class="tag">{{ percentage_sold }}%</span></p>
+  <p>Percentage Unsold: <span class="tag">{{ percentage_unsold }}%</span></p>
+  <p>Total Percentage: <span class="tag">{{ total_percentage }}%</span></p>
+</div> -->
+</div>
+{% endblock %}

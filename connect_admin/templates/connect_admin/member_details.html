@@ -1,0 +1,62 @@
+{% extends 'connect_admin/base.html' %}
+
+{% block nav-items %}
+<li class="nav-item">
+  <a class="nav-link" href="{% url 'connect_admin:dashboard' %}">
+    <i class="fa fa-home nav-icon"></i>Home
+  </a>
+</li>
+<li class="nav-item">
+  <a class="nav-link" href="{% url 'connect_admin:news' %}">
+    <i class="fa fa-newspaper-o nav-icon"></i>News
+  </a>
+</li>
+<li class="nav-item">
+  <a class="nav-link" href="{% url 'connect_admin:projects' %}">
+    <i class="fas fa-project-diagram nav-icon"></i>Projects
+  </a>
+</li>
+<li class="nav-item">
+  <a class="nav-link active" href="{% url 'connect_admin:members' %}">
+    <i class="fas fa-users nav-icon"></i>Members
+  </a>
+</li>
+{% endblock %}
+
+{% block main-content %}
+<div class="main-application-wrap">
+  <div class="member-wrap custom-container" id="member">
+    <div class="container text-center">
+      <h2 class="text-start scroll-animation">Member Details</h2>
+      <br>
+      <br>
+      <div class="member-details-container update-container">
+        <img 
+          src="{{ member.picture.url }}" 
+          alt="{{ member.name }}" 
+          class="img-fluid mb-3"
+        >
+        <div class="member-details text-start">
+          <h1> {{ member.member_id }}  - {{ member.name }}</h1>
+          <p><strong>Gender: </strong>{{ member.gender }} </p>
+          <p><strong>Email: </strong>{{ member.email }} </p>
+          <p><strong>Contact: </strong>{{ member.contact }} </p>
+          <br>
+          <div class="card-footer">
+            <span style="display: flex; gap: 30px;">
+              <a href="{% url 'connect_admin:members' %}" class="edit-tag footer-tag">
+                <i class="fa fa-home"></i>
+                Home
+              </a>
+              <a href="{% url 'connect_admin:delete_member' member.id %}" class="delete-tag footer-tag" id="delete-member-{{ member.id }}">
+                <i class="fa fa-trash"></i>
+                Remove
+              </a>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

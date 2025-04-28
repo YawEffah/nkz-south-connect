@@ -1,0 +1,102 @@
+{% extends 'connect_admin/base.html' %} {% block nav-items %}
+<li class="nav-item">
+  <a class="nav-link" href="{% url 'connect_admin:dashboard' %}"
+    ><i class="fa fa-home nav-icon"></i>Home</a
+  >
+</li>
+<li class="nav-item">
+    <a class="nav-link active" href="{% url 'connect_admin:news' %}"
+      ><i class="fa fa-newspaper-o nav-icon"></i>News</a
+    >
+</li>
+<li class="nav-item">
+    <a class="nav-link" href="{% url 'connect_admin:projects' %}"
+      ><i class="fa fas fa-project-diagram nav-icon"></i>Projects</a
+    >
+</li>
+<li class="nav-item">
+  <a class="nav-link" href="{% url 'connect_admin:members' %}">
+    <i class="fas fa-users nav-icon"></i>Members
+  </a>
+</li>
+{% endblock %} {% block main-content %}
+<div class="main-application-wrap">
+  <div class="news-wrap custom-container" id="news">
+    <br>
+    <button
+      type="button"
+      id="open-generate-card-modal"
+      class="cta-btn register-cta"
+    >
+      <i class="fa fa-plus"></i> Add News
+    </button>
+    <!-- Add Programme Modal -->
+    <div id="generateCardModal" class="custom-modal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3>Add News</h3>
+          <div class="close-nav" id="close-modal">
+            <i class="fa fa-times close-icon"></i>
+          </div>
+        </div>
+        <div class="modal-body">
+          <form method="POST" enctype="multipart/form-data" novalidate class="text-start">
+            {% csrf_token %}
+              <div class="form-group">
+                  {{ form.title.label }}
+                  {{ form.title }}
+              </div>
+             <div class="form-group">
+                  {{ form.content.label }}
+                  {{ form.content }}
+              </div>
+              <div class="form-group">
+                {{ form.image.label }}
+                {{ form.image }}
+              </div>
+              <input type="submit" value="Save" class="submit-btn cta-btn" aria-label="Submit the news update form" />
+          </form>
+        </div>
+      </div>
+    </div>
+    <br>
+    <br>
+    <div class="container text-center">
+        <h2 class="text-start scroll-animation">News</h2>
+        <div class="row news">
+            <!-- News 1 -->
+             {% for news in current_news %}
+                <div class="news-item text-center">
+                    {% if news.image %}
+                        <img src="{{ news.image.url }}" alt="{{ news.title }}" class="img-fluid mb-3">
+                    {% else %}
+                        <img src="{% static 'connect_admin/images/img.png'}" alt="Default Image" class="img-fluid mb-3">
+                    {% endif %}
+                    <div class="news-info">
+                        <p class="date-tag text-start">
+                          <i class="fa fa-calendar date-icon"></i> {{ news.date }}
+                        </p>
+                        <a href="#"><p>{{ news.title }}</p></a>
+                        <div class="card-footer">
+                          <a href="{% url 'connect_admin:edit_news' news.id %}" class="edit-tag footer-tag">
+                            <i class="fa fa-edit"></i>
+                            Edit
+                          </a>
+                          <a href="{% url 'connect_admin:delete_news' news.id %}" class="delete-tag footer-tag" id="delete-news-{{ news.id }}">
+                            <i class="fa fa-trash"></i>
+                            Remove
+                          </a>
+                        </div>
+                        
+                    </div>
+                </div>
+                {% empty %}
+                    <h5 class="text-center alert alert-warning">No news available</h5>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+  </div>
+</div>
+
+{% endblock %}
