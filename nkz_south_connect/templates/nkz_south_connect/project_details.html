@@ -2,6 +2,7 @@
 {% load static %}
 {% block title %} Project | Nkz South Connect {% endblock %}
 
+
 {% block nav-items %}
     <li class="nav-item">
     <a class="nav-link" href="{% url 'nkz_south_connect:about_us' %}">
@@ -66,7 +67,10 @@
                 </p>
             </div>
         </article>
+
+        {% include "includes/share_buttons.html" %}
     </div>
+
 
     <!-- Comments Section with Responsive Scroll-Snap -->
     <div class="comments-section container custom-container mt-5">

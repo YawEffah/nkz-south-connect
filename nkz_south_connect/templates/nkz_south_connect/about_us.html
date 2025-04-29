@@ -79,14 +79,14 @@
                     {% for executive in executives %}
                         <div class="col-md-6 h-100 col-lg-4 mb-4">
                             <div class="executive text-center">
-                                {% if executive.image %}
-                                    <img src="{{ executive.image.url }}" alt="{{ executive.name }}" class="img-fluid mb-3">
+                                {% if executive.picture %}
+                                    <img src="{{ executive.picture.url }}" alt="{{ executive.name }}" class="img-fluid mb-3">
                                 {% else %}
                                     <img src="/static/images/default-profile.png" alt="Default Image" class="img-fluid mb-3">
                                 {% endif %}
                                 <div class="executive-info">
                                     <h5>{{ executive.name|default:"N/A" }}</h5>
-                                    <p>{{ executive.position|default:"Not specified" }}</p>
+                                    <p>{{ executive.get_position_display|default:"Not specified" }}</p>
                                 </div>
                             </div>
                         </div>
