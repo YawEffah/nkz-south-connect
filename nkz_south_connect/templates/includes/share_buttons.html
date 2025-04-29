@@ -1,12 +1,6 @@
 {% load share_tags %}
 
-<div class="share-container">
-    <!-- Copy URL Button -->
-    <button class="share-btn copy-btn" onclick="copyToClipboard('{{ request.build_absolute_uri }}')" 
-            title="Copy link to clipboard">
-        <i class="fas fa-copy"></i>
-    </button>
-    
+<div class="share-container">  
     <!-- Social Share Buttons -->
     <a href="{% social_share_url 'facebook' %}" target="_blank" class="share-btn facebook" 
        title="Share on Facebook">
@@ -24,6 +18,12 @@
        title="Share on WhatsApp">
         <i class="fab fa-whatsapp"></i>
     </a>
+
+     <!-- Copy URL Button -->
+     <button class="share-btn copy-btn" onclick="copyToClipboard('{{ request.build_absolute_uri }}')" 
+            title="Copy link to clipboard">
+        <i class="fas fa-copy"></i>
+    </button>
     
     <!-- Web Share API Button (Mobile) -->
     <button class="share-btn web-share" onclick="webShare('{{ request.build_absolute_uri }}')" 

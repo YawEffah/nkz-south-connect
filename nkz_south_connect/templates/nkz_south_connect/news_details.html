@@ -28,7 +28,7 @@
           <img src="{{ news.image.url }}" alt="News" class="img-fluid">
           <article class="news-content">
               <h1>{{ news.title }}</h1>
-              <p class="date-tag">{{ news.date }}</p>
+              <p class="date-tag"><i class="fa fa-calendar date-icon"></i> {{ news.date }}</p>
               <p>{{ news.content }}</p>
           </article>
 
@@ -51,6 +51,7 @@
                           {% endif %}
                           <div class="news-info">
                               <p class="date-tag text-start">
+                                <i class="fa fa-calendar date-icon"></i> 
                                 {{ news.date }}
                               </p>
                               <a href="{% url 'nkz_south_connect:news_details' news.title %}"><p>{{ news.title }}</p></a>
