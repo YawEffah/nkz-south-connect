@@ -55,6 +55,8 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'core.urls'
+# settings.py
+LOGIN_URL = 'connect_admin:login'
 
 TEMPLATES = [
     {

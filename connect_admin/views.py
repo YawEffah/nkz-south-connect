@@ -8,6 +8,7 @@ from django.contrib.auth.models import User
 from .forms import  NewsForm, LoginForm, ProjectForm, MemberForm
 from django.db.models import Sum
 from django.db.models import Count, Q
+from django.contrib.auth.decorators import login_required
 
 
 # Create your views here.
@@ -51,7 +52,7 @@ def logout_view(request):
     messages.error(request, 'You have been logged out')
     return redirect(reverse('connect_admin:login'))
 
-
+@login_required
 def admin_dashboard(request):
     if not request.user.is_authenticated:
         return redirect(reverse('connect_admin:login'))
@@ -69,7 +70,7 @@ def admin_dashboard(request):
     }
     return render(request, 'connect_admin/dashboard.html', context)
 
-
+@login_required
 def news_dashboard(request):
     current_news = News.objects.filter(is_disabled=False).order_by('-date')[:4]
     if request.method == 'POST':
@@ -86,7 +87,7 @@ def news_dashboard(request):
 
     return render(request, 'connect_admin/news_dashboard.html', {'form': form, 'current_news': current_news})
 
-
+@login_required
 def projects_dashboard(request):
     projects = Project.objects.all()
     
@@ -112,6 +113,7 @@ def projects_dashboard(request):
         'form': form,
     })
 
+@login_required
 def members_dashboard(request):
     # Get the member_id from the query parameters, if provided
     member_id = request.GET.get('member_id')
@@ -159,12 +161,12 @@ def members_dashboard(request):
     return render(request, 'connect_admin/members_dashboard.html', context)
 
 
-
+@login_required
 def member_details(request, member_id):
     member = get_object_or_404(Member, member_id=member_id)
     return render(request, 'connect_admin/member_details.html', {'member': member})
 
-
+@login_required
 def edit_member_view(request, member_id):
     member = get_object_or_404(Member, pk=member_id)
     if request.method == 'POST':
@@ -177,14 +179,14 @@ def edit_member_view(request, member_id):
         form = MemberForm(instance=member)
     return render(request, 'connect_admin/edit_member.html', {'member':member, 'form': form})
 
-
+@login_required
 def delete_member(request, member_id):
     member = get_object_or_404(Member, pk=member_id)
     member.delete()
     messages.success(request, 'Member deleted successfully')
     return redirect(reverse('connect_admin:members'))
 
-
+@login_required
 def edit_news_view(request, news_id):
     news = get_object_or_404(News, pk=news_id)
     if request.method == 'POST':
@@ -197,14 +199,14 @@ def edit_news_view(request, news_id):
         form = NewsForm(instance=news)
     return render(request, 'connect_admin/edit_news.html', {'news':news, 'form': form})
 
-
+@login_required
 def delete_news(request, news_id):
     project = get_object_or_404(News, pk=news_id)
     project.delete()
     messages.success(request, 'News deleted successfully')
     return redirect(reverse('connect_admin:news'))
 
-
+@login_required
 def edit_project_view(request, project_id):
     project = get_object_or_404(Project, pk=project_id)
     if request.method == 'POST':
@@ -217,7 +219,7 @@ def edit_project_view(request, project_id):
         form = ProjectForm(instance=project)
     return render(request, 'connect_admin/edit_project.html', {'project':project, 'form': form})
 
-
+@login_required
 def delete_project(request, project_id):
     project = get_object_or_404(Project, pk=project_id)
     project.delete()
