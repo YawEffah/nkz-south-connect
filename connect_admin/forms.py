@@ -33,10 +33,12 @@ class NewsForm(forms.ModelForm):
 class MemberForm(forms.ModelForm):
     class Meta:
         model = Member
-        fields = ['name', 'gender', 'picture', 'date_of_birth', 'contact', 'email']
+        fields = ['name', 'gender','date_of_birth', 'contact', 'email', 'category','position','picture']
         widgets = {
             'name': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Enter full name'}),
             'gender': forms.Select(attrs={'class': 'form-control'}),
+            'category': forms.Select(attrs={'class': 'form-control'}),
+            'position': forms.Select(attrs={'class': 'form-control'}),
             'picture': forms.ClearableFileInput(attrs={'class': 'form-control'}),
             'date_of_birth': forms.DateInput(attrs={
                 'class': 'form-control',
@@ -133,7 +135,6 @@ class CommentForm(forms.ModelForm):
         widget=forms.HiddenInput(),
         initial=0
     )
-
     class Meta:
         model = Comment
         fields = ['name', 'content', 'rating']

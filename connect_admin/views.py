@@ -129,11 +129,9 @@ def members_dashboard(request):
         number_of_males=Count('id', filter=Q(gender='Male')),
         number_of_females=Count('id', filter=Q(gender='Female'))
     )
-
     if request.method == 'POST':
         form = MemberForm(request.POST, request.FILES)
         if form.is_valid():
-            print(form)
             form.save()
             messages.success(request, 'Member added successfully')
             return redirect(reverse('connect_admin:members'))
@@ -165,6 +163,19 @@ def members_dashboard(request):
 def member_details(request, member_id):
     member = get_object_or_404(Member, member_id=member_id)
     return render(request, 'connect_admin/member_details.html', {'member': member})
+
+
+def edit_member_view(request, member_id):
+    member = get_object_or_404(Member, pk=member_id)
+    if request.method == 'POST':
+        form = MemberForm(request.POST, request.FILES, instance=member)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Member updated successfully!')
+            return redirect(reverse('connect_admin:members'))
+    else:
+        form = MemberForm(instance=member)
+    return render(request, 'connect_admin/edit_member.html', {'member':member, 'form': form})
 
 
 def delete_member(request, member_id):

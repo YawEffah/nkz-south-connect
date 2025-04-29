@@ -6,15 +6,6 @@ from django.utils.safestring import mark_safe
 # Create your models here.
 
 
-class Executive(models.Model):
-    name = models.CharField(max_length=100)
-    position = models.CharField(max_length=100)
-    image = models.ImageField(upload_to='executives/')
-
-    def __str__(self):
-        return self.name
-
-
 class News(models.Model):
     title = models.CharField(max_length=200)
     content = models.TextField()
@@ -100,6 +91,21 @@ class Member(models.Model):
             ('Male', 'Male'),
             ('Female', 'Female')
         ), max_length=100
+    )
+    category = models.CharField(
+        choices=(
+            ('executive', 'Executive'),
+            ('member', 'Member')
+        ), max_length=100
+    )
+    position = models.CharField(
+        choices=(
+            ('president', 'President'),
+            ('vice_president', 'Vice President'),
+            ('secretary', 'Secretary'),
+            ('treasurer', 'Treasurer'),
+            ('member', 'Member')
+        ), max_length=100, default='member'
     )
     status = models.CharField(
         choices=(

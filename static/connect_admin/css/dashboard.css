@@ -251,7 +251,6 @@ body {
 
 
 
-
 /* Modal styles */
 .custom-modal {
     display: none;
@@ -276,6 +275,12 @@ body {
     box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3);
     transform: translateY(-50px);
     animation: fadeInUp 0.4s forwards ease-in-out;
+}
+
+.member-form-content{
+    display: grid;
+    grid-gap: 10px;
+    grid-template-columns: repeat(2, 1fr);
 }
 
 @keyframes fadeInUp {
@@ -801,6 +806,13 @@ footer .socials span{
     justify-content: space-between;
     margin: 20px 0;
 }
+
+.errorlist li{
+    color: red;
+    font-size: 12px;
+    margin-top: 5px;
+}
+
 
 /* Responsive Media Queries for Tablet */
 @media screen and (min-width: 768px) {

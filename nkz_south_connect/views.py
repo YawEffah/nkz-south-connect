@@ -7,7 +7,7 @@ from connect_admin.forms import CommentForm
 
 
 def index(request):
-    executives = Executive.objects.all()[:3]
+    executives = Member.objects.filter(category='executive')[:3]
     current_news = News.objects.filter(is_disabled=False).order_by('-date')[:4]
     projects = Project.objects.all()
     health_projects = Project.objects.filter(category='health').count()
@@ -28,7 +28,7 @@ def index(request):
 
 
 def about_us(request):
-    executives = Executive.objects.all()
+    executives = Member.objects.filter(category='executive')
 
     context = {
         'executives': executives,

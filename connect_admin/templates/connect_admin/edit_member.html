@@ -1,0 +1,80 @@
+{% extends 'connect_admin/base.html' %}
+
+{% block nav-items %}
+<li class="nav-item">
+  <a class="nav-link" href="{% url 'connect_admin:dashboard' %}">
+    <i class="fa fa-home nav-icon"></i>Home
+  </a>
+</li>
+<li class="nav-item">
+  <a class="nav-link" href="{% url 'connect_admin:news' %}">
+    <i class="fa fa-newspaper-o nav-icon"></i>News
+  </a>
+</li>
+<li class="nav-item">
+  <a class="nav-link active" href="{% url 'connect_admin:projects' %}">
+    <i class="fas fa-project-diagram nav-icon"></i>Projects
+  </a>
+</li>
+<li class="nav-item">
+  <a class="nav-link" href="{% url 'connect_admin:members' %}">
+    <i class="fas fa-users nav-icon"></i>Members
+  </a>
+</li>
+{% endblock %}
+
+{% block main-content %}
+<div class="main-application-wrap">
+  <div class="projects-wrap custom-container" id="projects">
+    <div class="container text-center">
+      <h2 class="text-start scroll-animation">Update Member</h2>
+      <br>
+      <br>
+      <div class="project-details-container update-container">
+        {% if member.picture %}
+        <img src="{{ member.picture.url }}" 
+            alt="{{ member.name }}" 
+            class="member-image">
+        {% endif %}
+        <form method="POST" enctype="multipart/form-data" novalidate class="text-start">
+          {% csrf_token %}
+            <div class="form-group">
+                {{ form.name.label_tag }}
+                {{ form.name }}
+            </div>
+            <div class="form-group-grid">
+                <div class="form-group">
+                    {{ form.gender.label_tag }}
+                    {{ form.gender }}
+                </div>
+                <div class="form-group">
+                    {{ form.date_of_birth.label_tag }}
+                    {{ form.date_of_birth }}
+                </div>
+                <div class="form-group">
+                    {{ form.contact.label_tag }}
+                    {{ form.contact }}
+                </div>
+                <div class="form-group">
+                    {{ form.email.label_tag }}
+                    {{ form.email }}
+                </div>
+                <div class="form-group">
+                    {{ form.position.label_tag }}
+                    {{ form.position }}
+                </div>
+                <div class="form-group">
+                    {{ form.category.label_tag }}
+                    {{ form.category }}
+                </div>
+            </div>
+          <div class="form-group cta-grid">
+            <a href="{% url 'connect_admin:members' %}" class="cta-btn cancel-btn">Cancel</a>
+            <input type="submit" value="Save" class="submit-btn cta-btn" aria-label="Submit the news update form" />
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

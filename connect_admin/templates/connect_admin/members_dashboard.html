@@ -82,13 +82,15 @@
       <div class="modal-body">
         <form method="POST" enctype="multipart/form-data" novalidate class="text-start">
           {% csrf_token %}
-          {% for field in form %}
-          <div class="form-group">
-            {{ field.label_tag }}
-            {{ field }}
-            {{ field.errors }}
+          <div class="member-form-content">
+            {% for field in form %}
+            <div class="form-group">
+              {{ field.label_tag }}
+              {{ field }}
+              {{ field.errors }}
+            </div>
+            {% endfor %}
           </div>
-          {% endfor %}
           <input type="submit" value="Submit" class="cta-btn form-control">
         </form>
       </div>
@@ -106,6 +108,7 @@
           <tr>
             <th>ID</th>
             <th>Name</th>
+            <th>Position</th>
             <th>Contact</th>
             <th>Action</th>
           </tr>
@@ -115,6 +118,7 @@
           <tr>
             <td data-label="Id-number">{{ member.member_id }}</td>
             <td data-label="Name">{{ member.name }}</td>
+            <td data-label="Position">{{ member.get_category_display }}</td>
             <td data-label="Contact">{{ member.contact }}</td>
             <td>
               <div class="action-menu">

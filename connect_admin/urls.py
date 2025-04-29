@@ -12,6 +12,7 @@ urlpatterns = [
     path('projects', views.projects_dashboard, name='projects'),
     path('members', views.members_dashboard, name='members'),
     path('member-details/<str:member_id>', views.member_details, name='member_details'),
+    path('edit-member/<int:member_id>/update', views.edit_member_view, name='edit_member'),
     path('delete_member/<int:member_id>', views.delete_member, name='delete_member'),
     path('edit_news/<int:news_id>', views.edit_news_view, name='edit_news'),
     path('delete_news/<int:news_id>', views.delete_news, name='delete_news'),
