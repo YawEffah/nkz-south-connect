@@ -2,6 +2,7 @@
     font-size: 18px;
     color: #024b29;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    scroll-behavior: smooth;
 }
 
 :root {
