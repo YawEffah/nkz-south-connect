@@ -5,35 +5,35 @@ let main = document.querySelector('.main');
 
 
 
-// Function to toggle the action menu
-function toggleActionsMenu(event) {
-  event.stopPropagation(); // Prevents the menu from closing when clicking inside
-  const clickedIcon = event.target;
+// // Function to toggle the action menu
+// function toggleActionsMenu(event) {
+//   event.stopPropagation(); // Prevents the menu from closing when clicking inside
+//   const clickedIcon = event.target;
 
-  // Close any other open menus
-  document.querySelectorAll('.action-menu-content').forEach(menu => {
-      if (menu !== clickedIcon.nextElementSibling) {
-          menu.parentElement.classList.remove('show');
-      }
-  });
+//   // Close any other open menus
+//   document.querySelectorAll('.action-menu-content').forEach(menu => {
+//       if (menu !== clickedIcon.nextElementSibling) {
+//           menu.parentElement.classList.remove('show');
+//       }
+//   });
 
-  // Toggle the visibility of the clicked menu
-  clickedIcon.parentElement.classList.toggle('show');
-}
+//   // Toggle the visibility of the clicked menu
+//   clickedIcon.parentElement.classList.toggle('show');
+// }
 
-// Add event listeners to each menu icon for toggling
-document.querySelectorAll('.action-menu-icon').forEach(menuIcon => {
-  menuIcon.addEventListener('click', toggleActionsMenu);
-});
+// // Add event listeners to each menu icon for toggling
+// document.querySelectorAll('.action-menu-icon').forEach(menuIcon => {
+//   menuIcon.addEventListener('click', toggleActionsMenu);
+// });
 
-// Close the menu when clicking outside of it
-window.addEventListener('click', (event) => {
-  if (!event.target.closest('.action-menu-icon')) {
-      document.querySelectorAll('.action-menu').forEach(menu => {
-          menu.classList.remove('show');
-      });
-  }
-});
+// // Close the menu when clicking outside of it
+// window.addEventListener('click', (event) => {
+//   if (!event.target.closest('.action-menu-icon')) {
+//       document.querySelectorAll('.action-menu').forEach(menu => {
+//           menu.classList.remove('show');
+//       });
+//   }
+// });
 
 
 

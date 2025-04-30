@@ -3,8 +3,8 @@ from .models import News, Project, Member, Comment, ProjectImage
 
 
 class LoginForm(forms.Form):
-    username = forms.CharField(widget=forms.TextInput(attrs={'class':'form-control','placeholder': 'Enter Username'}))
-    password = forms.CharField(widget=forms.PasswordInput(attrs={'class':'form-control','placeholder': 'Enter Password'}))
+    username = forms.CharField(widget=forms.TextInput(attrs={'class':'form-control','placeholder': 'Enter username'}))
+    password = forms.CharField(widget=forms.PasswordInput(attrs={'class':'form-control','placeholder': 'Enter password'}))
 
 
 class NewsForm(forms.ModelForm):

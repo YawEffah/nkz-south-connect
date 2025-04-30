@@ -141,13 +141,13 @@
                         </p>
                     </div>
                       <div class="card-footer">
-                        <a href="{% url 'connect_admin:edit_project' project.id %}" class="edit-tag footer-tag">
-                          <i class="fa fa-edit"></i>
-                          Edit
-                        </a>
                         <a href="{% url 'connect_admin:delete_project' project.id %}" class="delete-tag footer-tag">
                           <i class="fa fa-trash"></i>
                           Remove
+                        </a>
+                        <a href="{% url 'connect_admin:edit_project' project.id %}" class="edit-tag footer-tag">
+                          <i class="fa fa-edit"></i>
+                          Edit
                         </a>
                       </div>
                   </div>

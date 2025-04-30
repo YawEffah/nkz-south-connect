@@ -78,16 +78,15 @@
                         </p>
                         <a href="#"><p>{{ news.title }}</p></a>
                         <div class="card-footer">
-                          <a href="{% url 'connect_admin:edit_news' news.id %}" class="edit-tag footer-tag">
-                            <i class="fa fa-edit"></i>
-                            Edit
-                          </a>
                           <a href="{% url 'connect_admin:delete_news' news.id %}" class="delete-tag footer-tag" id="delete-news-{{ news.id }}">
                             <i class="fa fa-trash"></i>
                             Remove
                           </a>
+                          <a href="{% url 'connect_admin:edit_news' news.id %}" class="edit-tag footer-tag">
+                            <i class="fa fa-edit"></i>
+                            Edit
+                          </a>
                         </div>
-                        
                     </div>
                 </div>
                 {% empty %}

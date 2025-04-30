@@ -645,59 +645,28 @@ form input[type="checkbox"]{
     display: inline-block;
 }
 
-.action-menu-icon {
+.action-btn {
     cursor: pointer;
     color: #939393;
     padding: 10px;
-    border-radius: 50%;
-    ;
-    font-size: 14px;
+    font-size: 12px;
+    text-decoration: none;
+    border-radius: 8px;
+    margin-right: 5px;
+    background-color: #ddd;
     transition: background-color 0.3s ease;
 }
 
-.action-menu-icon:hover {
-    background-color: #ddd;
-}
-
-.action-menu-content {
-    width: 120px;
-    display: block;
-    opacity: 0;
-    right: 0;
-    z-index: 7;
-    visibility: hidden;
-    position: absolute;
-    overflow: hidden;
-    border-radius: 10px;
-    background-color: white;
-    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
-    transform: translateY(-10px);
-    transition: opacity 0.3s ease, transform 0.3s ease;
-}
-
-.action-menu.show .action-menu-content {
-    opacity: 1;
-    transform: translateY(0);
-    visibility: visible;
-}
-
-.action-menu-content a {
-    padding: 15px;
-    display: block;
-    text-decoration: none;
-    font-size: 12px;
+.action-btn:hover {
+    background-color: #e6e9ec;
 }
 
 .action-icon {
-    color: var(--accent-yellow);
-    width: 30px;
+    color: #AC961A;
+    /* width: 20px; */
     font-size: 12px;
-    padding: 5px;
 }
 
-.action-menu-content a:hover {
-    background-color: #f4f4f4;
-}
 
 
 /* Scrollable on smaller screens */
