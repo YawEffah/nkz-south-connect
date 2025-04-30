@@ -33,11 +33,11 @@ class NewsForm(forms.ModelForm):
 class MemberForm(forms.ModelForm):
     class Meta:
         model = Member
-        fields = ['name', 'gender','date_of_birth', 'contact', 'email', 'category','position','picture']
+        fields = ['name', 'gender','date_of_birth', 'contact', 'email', 'type','position','picture']
         widgets = {
             'name': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Enter full name'}),
             'gender': forms.Select(attrs={'class': 'form-control'}),
-            'category': forms.Select(attrs={'class': 'form-control'}),
+            'type': forms.Select(attrs={'class': 'form-control'}),
             'position': forms.Select(attrs={'class': 'form-control'}),
             'picture': forms.ClearableFileInput(attrs={'class': 'form-control'}),
             'date_of_birth': forms.DateInput(attrs={
@@ -59,7 +59,7 @@ class ProjectForm(forms.ModelForm):
     # Remove 'image' from fields (since we'll handle images separately)
     class Meta:
         model = Project
-        fields = ['name', 'description', 'location', 'status', 'category']  # Removed 'image'
+        fields = ['name', 'description', 'location', 'status', 'type']  # Removed 'image'
         widgets = {
             'name': forms.TextInput(attrs={
                 'class': 'inputField',
@@ -77,7 +77,7 @@ class ProjectForm(forms.ModelForm):
             'status': forms.Select(attrs={
                 'class': 'inputField',
             }),
-            'category': forms.Select(attrs={
+            'type': forms.Select(attrs={
                 'class': 'inputField',
             }),
         }

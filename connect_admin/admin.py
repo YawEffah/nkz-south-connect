@@ -20,8 +20,8 @@ class ProjectImageInline(admin.TabularInline):  # or admin.StackedInline
 @admin.register(Project)
 class ProjectAdmin(admin.ModelAdmin):
     inlines = [ProjectImageInline]
-    list_display = ('name', 'status', 'category', 'date')
-    list_filter = ('status', 'category')
+    list_display = ('name', 'status', 'type', 'date')
+    list_filter = ('status', 'type')
     search_fields = ('name', 'description')
 
 @admin.register(ProjectImage)

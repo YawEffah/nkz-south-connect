@@ -28,7 +28,7 @@ class Project(models.Model):
         ), 
         max_length=100
     )
-    category = models.CharField(
+    type = models.CharField(
         choices=(
             ('health', 'Health'), 
             ('education', 'Education'), 
@@ -92,7 +92,7 @@ class Member(models.Model):
             ('Female', 'Female')
         ), max_length=100
     )
-    category = models.CharField(
+    type = models.CharField(
         choices=(
             ('executive', 'Executive'),
             ('member', 'Member')
