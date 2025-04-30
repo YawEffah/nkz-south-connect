@@ -217,6 +217,10 @@ a{
     margin: 0 auto;
 }
 
+.news-wrap{
+    padding: 20px;
+}
+
 .news-wrap h2{
     font-size: 32px;
     color: var(--accent-green);
@@ -262,7 +266,7 @@ a{
 .news{
     display: grid;
     grid-gap: 20px;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: 1fr;
 }
 
 .news-details img,
@@ -729,7 +733,7 @@ a{
     }
 
     .news{
-        grid-template-columns: repeat(3, 1fr);
+        grid-template-columns: repeat(2, 1fr);
     }
 
     .news-details img,
