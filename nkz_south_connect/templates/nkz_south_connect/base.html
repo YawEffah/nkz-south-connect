@@ -11,6 +11,7 @@
       <script src="https://kit.fontawesome.com/c42d26af79.js" crossorigin="anonymous"></script>
       <link href="{% static 'nkz_south_connect/images/logo.png' %}" rel="fa icon" type="short icon">
       <link href="{% static 'nkz_south_connect/css/style.css' %}" rel="stylesheet">
+      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     </head>
 <body>
     <div class="sticky-top">
@@ -62,6 +63,35 @@
             </div>
         </nav>
     </div>
+     <!-- Display message -->
+     {% if messages %}
+     {% for message in messages %}
+         <script>
+             const Toast = Swal.mixin({
+                 toast: true,
+                 position: "top-end",
+                 showConfirmButton: false,
+                 timer: 3000,
+                 timerProgressBar: true,
+                 didOpen: (toast) => {
+                     toast.onmouseenter = Swal.stopTimer;
+                     toast.onmouseleave = Swal.resumeTimer;
+                 }
+             });
+
+             // Extract the message and type
+             const messageContent = "{{ message.message }}";
+             const messageType = "{{ message.tags }}"; // Assuming tags hold the message type
+
+             Toast.fire({
+                 icon: messageType === 'error' ? 'error' : 'success',
+                 title: messageContent,
+                 color: messageType === 'error' ? '#721c24' : '#155724' // Red or green text colors
+             });
+         </script>
+     {% endfor %}
+     {% endif %}
+     <!-- Success message ends here -->
     {% block content %}
     <!-- Content goes here -->
     {% endblock %}

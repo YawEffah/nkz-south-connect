@@ -183,7 +183,7 @@ def edit_member_view(request, member_id):
 def delete_member(request, member_id):
     member = get_object_or_404(Member, pk=member_id)
     member.delete()
-    messages.success(request, 'Member deleted successfully')
+    messages.warning(request, 'Member deleted successfully')
     return redirect(reverse('connect_admin:members'))
 
 @login_required
@@ -203,7 +203,7 @@ def edit_news_view(request, news_id):
 def delete_news(request, news_id):
     project = get_object_or_404(News, pk=news_id)
     project.delete()
-    messages.success(request, 'News deleted successfully')
+    messages.warning(request, 'News deleted successfully')
     return redirect(reverse('connect_admin:news'))
 
 @login_required
@@ -223,5 +223,5 @@ def edit_project_view(request, project_id):
 def delete_project(request, project_id):
     project = get_object_or_404(Project, pk=project_id)
     project.delete()
-    messages.success(request, 'Project deleted successfully')
+    messages.warning(request, 'Project deleted successfully')
     return redirect(reverse('connect_admin:projects'))

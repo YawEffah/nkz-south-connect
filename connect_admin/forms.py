@@ -45,8 +45,8 @@ class MemberForm(forms.ModelForm):
                 'type': 'date',
                 'placeholder': 'YYYY-MM-DD'
             }),
-            'contact': forms.TextInput(attrs={'class': 'inputField', 'placeholder': 'Enter contact number'}),
-            'email': forms.EmailInput(attrs={'class': 'inputField', 'placeholder': 'Enter email address'}),
+            'contact': forms.TextInput(attrs={'class': 'inputField', 'placeholder': 'e.g. 05533377338'}),
+            'email': forms.EmailInput(attrs={'class': 'inputField', 'placeholder': 'e.g. example@gmail.com'}),
         }
 
     def clean_contact(self):
@@ -140,11 +140,11 @@ class CommentForm(forms.ModelForm):
         fields = ['name', 'content', 'rating']
         widgets = {
             'name': forms.TextInput(attrs={
-                'class': 'inputField',
+                'class': 'form-control',
                 'placeholder': 'e.g. Collins Effah'
             }),
             'content': forms.Textarea(attrs={
-                'class': 'inputField',
+                'class': 'form-control',
                 'rows': 4,
                 'placeholder': 'Write your comment here...'
             }),
