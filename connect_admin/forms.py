@@ -3,8 +3,8 @@ from .models import News, Project, Member, Comment, ProjectImage
 
 
 class LoginForm(forms.Form):
-    username = forms.CharField(widget=forms.TextInput(attrs={'class':'form-control','placeholder': 'Enter username'}))
-    password = forms.CharField(widget=forms.PasswordInput(attrs={'class':'form-control','placeholder': 'Enter password'}))
+    username = forms.CharField(widget=forms.TextInput(attrs={'class':'inputField','placeholder': 'Enter username'}))
+    password = forms.CharField(widget=forms.PasswordInput(attrs={'class':'inputField','placeholder': 'Enter password'}))
 
 
 class NewsForm(forms.ModelForm):
@@ -35,18 +35,18 @@ class MemberForm(forms.ModelForm):
         model = Member
         fields = ['name', 'gender','date_of_birth', 'contact', 'email', 'type','position','picture']
         widgets = {
-            'name': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Enter full name'}),
-            'gender': forms.Select(attrs={'class': 'form-control'}),
-            'type': forms.Select(attrs={'class': 'form-control'}),
-            'position': forms.Select(attrs={'class': 'form-control'}),
-            'picture': forms.ClearableFileInput(attrs={'class': 'form-control'}),
+            'name': forms.TextInput(attrs={'class': 'inputField', 'placeholder': 'Enter full name'}),
+            'gender': forms.Select(attrs={'class': 'inputField'}),
+            'type': forms.Select(attrs={'class': 'inputField'}),
+            'position': forms.Select(attrs={'class': 'inputField'}),
+            'picture': forms.ClearableFileInput(attrs={'class': 'inputField'}),
             'date_of_birth': forms.DateInput(attrs={
-                'class': 'form-control',
+                'class': 'inputField',
                 'type': 'date',
                 'placeholder': 'YYYY-MM-DD'
             }),
-            'contact': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Enter contact number'}),
-            'email': forms.EmailInput(attrs={'class': 'form-control', 'placeholder': 'Enter email address'}),
+            'contact': forms.TextInput(attrs={'class': 'inputField', 'placeholder': 'Enter contact number'}),
+            'email': forms.EmailInput(attrs={'class': 'inputField', 'placeholder': 'Enter email address'}),
         }
 
     def clean_contact(self):
@@ -140,11 +140,11 @@ class CommentForm(forms.ModelForm):
         fields = ['name', 'content', 'rating']
         widgets = {
             'name': forms.TextInput(attrs={
-                'class': 'form-control',
+                'class': 'inputField',
                 'placeholder': 'e.g. Collins Effah'
             }),
             'content': forms.Textarea(attrs={
-                'class': 'form-control',
+                'class': 'inputField',
                 'rows': 4,
                 'placeholder': 'Write your comment here...'
             }),

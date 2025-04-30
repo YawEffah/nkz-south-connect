@@ -482,6 +482,10 @@ form textarea{
     resize: none;
 }
 
+form select{
+    padding: 12px 10px;
+}
+
 form input[type="checkbox"]{
     width: auto;
 }
@@ -640,16 +644,11 @@ form input[type="checkbox"]{
 
 
 /* Action Menu Styling */
-.action-menu {
-    position: relative;
-    display: inline-block;
-}
 
 .action-btn {
     cursor: pointer;
     color: #939393;
-    padding: 10px;
-    font-size: 12px;
+    padding: 6px 10px;
     text-decoration: none;
     border-radius: 8px;
     margin-right: 5px;
@@ -663,8 +662,8 @@ form input[type="checkbox"]{
 
 .action-icon {
     color: #AC961A;
-    /* width: 20px; */
     font-size: 12px;
+    margin: 0;
 }
 
 

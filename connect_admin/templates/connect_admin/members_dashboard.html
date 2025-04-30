@@ -121,15 +121,9 @@
             <td data-label="Type">{{ member.get_type_display }}</td>
             <td data-label="Contact">{{ member.contact }}</td>
             <td>
-              <a href="{% url 'connect_admin:delete_member' member.id %}" class="delete-tag view-btn action-btn" id="delete-member-{{ member.id }}">
-                <i class="fa fa-trash"></i>
-              </a>
-                <a href="{% url 'connect_admin:edit_member' member.id %}" class="edit-tag view-btn action-btn">
-                  <i class="fa fa-edit action-icon"></i>
-                </a>
-                <a href="{% url 'connect_admin:member_details' member.member_id %}" class="view-btn action-btn">
-                  <i class="fa fa-eye action-icon"></i>
-                </a>
+              <a href="{% url 'connect_admin:delete_member' member.id %}" title="Delete" class="delete-tag view-btn action-btn" id="delete-member-{{ member.id }}"><i class="fa fa-trash"></i></a>
+                <a href="{% url 'connect_admin:edit_member' member.id %}" title="Edit" class="edit-tag view-btn action-btn"><i class="fa fa-edit action-icon"></i></a>
+                <a href="{% url 'connect_admin:member_details' member.member_id %}" title="View" class="view-btn action-btn"><i class="fa fa-eye action-icon"></i></a>
             </td>
           </tr>
           {% empty %}
