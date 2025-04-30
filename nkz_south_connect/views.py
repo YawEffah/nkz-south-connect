@@ -7,12 +7,12 @@ from connect_admin.forms import CommentForm
 
 
 def index(request):
-    executives = Member.objects.filter(category='executive')[:3]
+    executives = Member.objects.filter(type='executive')[:3]
     current_news = News.objects.filter(is_disabled=False).order_by('-date')[:4]
     projects = Project.objects.all()
-    health_projects = Project.objects.filter(category='health').count()
-    education_projects = Project.objects.filter(category='education').count()
-    other_projects = Project.objects.filter(category='other').count()
+    health_projects = Project.objects.filter(type='health').count()
+    education_projects = Project.objects.filter(type='education').count()
+    other_projects = Project.objects.filter(type='other').count()
     scholarships = Scholarship.objects.all().count()
 
     context = {
@@ -28,7 +28,7 @@ def index(request):
 
 
 def about_us(request):
-    executives = Member.objects.filter(category='executive')
+    executives = Member.objects.filter(type='executive')
 
     context = {
         'executives': executives,
