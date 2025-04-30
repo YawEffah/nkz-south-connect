@@ -119,8 +119,12 @@ a{
     background-color: var(--accent-red);
 }
 
-.custom-container{
+.main-container{
     padding: 80px 20px;
+}
+
+.secondary-custom-container{
+    padding: 60px 20px 0 20px;
 }
 
 .about-wrap h2{

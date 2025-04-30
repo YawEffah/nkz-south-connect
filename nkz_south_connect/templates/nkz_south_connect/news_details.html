@@ -24,7 +24,7 @@
 {% block content %}
   <main class="main">
       <!-- News details section -->
-      <div class="news-details container custom-container">
+      <div class="news-details container secondary-custom-container custom-container">
           <img src="{{ news.image.url }}" alt="News" class="img-fluid">
           <article class="news-content">
               <h1>{{ news.title }}</h1>
@@ -34,7 +34,9 @@
 
           {% include "includes/share_buttons.html" %}
       </div>
+      <br>
       <hr class="container">
+      <br>
       <!-- More News section -->
       <div class="news-wrap  container custom-container" id="news">
           <h1>More News</h1>
