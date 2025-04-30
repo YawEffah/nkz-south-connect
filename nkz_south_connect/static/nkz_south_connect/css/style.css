@@ -446,6 +446,58 @@ a{
 
 
 
+/* Initial state of elements with the common class */
+.fade-in-up {
+    opacity: 0;
+    transform: translateY(20px);
+    /* Start 20px below their final position */
+    transition: opacity 1s ease-out, transform 1s ease-out;
+}
+
+/* Class to be added when the page is loaded */
+.fade-in-up.animate {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Delay the second element (socials) */
+.fade-in-up.animate:nth-child(2) {
+    transition-delay: 0.5s;
+}
+
+/* Delay the second element (socials) */
+.fade-in-up.animate:nth-child(3) {
+    transition-delay: 0.8s;
+}
+
+.fade-in-up.delay.animate {
+    transition-delay: 0.5s;
+}
+
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.fade-in-up.animate {
+    animation: fadeInUp 1s ease-out forwards;
+}
+
+/* Add a delay to the .socials animation */
+.fade-in-up.delay.animate {
+    animation-delay: 0.5s;
+}
+
+
+
 /* Comments Style */
 .comments-slider {
     padding: 2rem 0;
