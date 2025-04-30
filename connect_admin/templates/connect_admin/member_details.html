@@ -37,12 +37,13 @@
           class="img-fluid mb-3"
         >
         <div class="member-details text-start">
-          <h1> {{ member.member_id }}  - {{ member.name }}</h1>
+          <h1 class="member-name">{{ member.name }}</h1>
+          <p><strong>Member ID: </strong>{{ member.member_id }}</p>
           <p><strong>Gender: </strong>{{ member.gender }}</p>
-          <p><strong>Catergory: </strong>{{ member.get_category_display }}</p>
+          <p><strong>Type: </strong>{{ member.get_type_display }}</p>
           <p><strong>Position: </strong>{{ member.get_position_display }}</p>
-          <p><strong>Email: </strong>{{ member.email }}</p>
           <p><strong>Contact: </strong>{{ member.contact }}</p>
+          <p><strong>Email: </strong>{{ member.email }}</p>
           <br>
           <div class="card-footer">
             <span style="display: flex; gap: 30px;">

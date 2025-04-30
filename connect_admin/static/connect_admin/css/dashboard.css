@@ -198,6 +198,11 @@ body {
     color: var(--accent-yellow);
 }
 
+.nav-logout-wrap {
+    position: absolute;
+    bottom: 30px;
+}
+
 .close-icon{
     color: var(--accent-red);
     font-size: 20px;
@@ -501,10 +506,13 @@ form input[type="checkbox"]{
     align-items: center;
 }
 
-
 .updates-form textarea {
     height: 120px;
     resize: none;
+}
+
+.member-name{
+    color: var(--accent-yellow);
 }
 
 /* Projects page style */

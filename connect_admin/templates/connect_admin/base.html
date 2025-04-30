@@ -63,9 +63,12 @@
                         {% block nav-items %}
                         
                         {% endblock %}
-                        <li class="nav-item">
-                            <a class="nav-link" href="{% url 'connect_admin:logout' %}"><i class="fas fa-sign-out-alt nav-icon"></i>Logout</a>
-                        </li>
+                        <div class="nav-logout-wrap">
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'connect_admin:logout' %}"><i
+                                        class="fas fa-sign-out-alt nav-icon"></i>Logout</a>
+                            </li>
+                        </div>
                     </ul>
                 </nav>
             </aside>
