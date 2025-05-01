@@ -283,7 +283,7 @@ def edit_scholarship_view(request, scholarship_id):
             messages.success(request, 'Scholarship updated successfully!')
             return redirect(reverse('connect_admin:members'))
     else:
-        form = MemberForm(instance=scholarship)
+        form = ScholarshipForm(instance=scholarship)
     return render(request, 'connect_admin/edit_scholarship.html', {'scholarship':scholarship, 'form': form})
 
 @login_required

@@ -150,7 +150,7 @@ class Scholarship(models.Model):
     recipient_id_number = models.CharField(max_length=20, unique=True)
     recipient_email = models.EmailField(max_length=200)
     recipient_phone = models.CharField(max_length=10)
-    date = models.DateTimeField(auto_now_add=True)
+    created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return self.recipient_name + ' - ' + self.type
