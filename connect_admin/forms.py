@@ -1,5 +1,5 @@
 from django import forms
-from .models import News, Project, Member, Comment, ProjectImage
+from .models import News, Project, Member, Comment, ProjectImage, Scholarship
 
 
 class LoginForm(forms.Form):
@@ -147,5 +147,46 @@ class CommentForm(forms.ModelForm):
                 'class': 'form-control',
                 'rows': 4,
                 'placeholder': 'Write your comment here...'
+            }),
+        }
+
+
+class ScholarshipForm(forms.ModelForm):
+    class Meta:
+        model = Scholarship
+        fields = ['name', 'type', 'amount', 'description', 'recipient_name', 'recipient_id_number', 'recipient_phone', 'recipient_email']
+        widgets = {
+            'name': forms.TextInput(attrs={
+                'class': 'inputField',
+                'placeholder': 'e.g. NDC Scholarship...'
+            }),
+            'type': forms.Select(attrs={
+                'class': 'inputField',
+                'placeholder': 'e.g. NDC Scholarship...'
+            }),
+            'amount': forms.NumberInput(attrs={
+                'class': 'inputField',
+                'placeholder': 'e.g. 1000.00'
+            }),
+            'description': forms.Textarea(attrs={
+                'class': 'inputField',
+                'rows': 3,
+                'placeholder': 'Write the scholarship description here...'
+            }),
+             'recipient_id_number': forms.TextInput(attrs={
+                'class': 'inputField',
+                'placeholder': 'e.g. GHA-XXXXXXXX-6'
+            }),
+             'recipient_name': forms.TextInput(attrs={
+                'class': 'inputField',
+                'placeholder': 'e.g. Collins Effah'
+            }),
+            'recipient_phone': forms.TextInput(attrs={
+                'class': 'inputField',
+                'placeholder': 'e.g. 05533377338'
+            }),
+            'recipient_email': forms.EmailInput(attrs={
+                'class': 'inputField',
+                'placeholder': 'e.g. example@gmail.com'
             }),
         }

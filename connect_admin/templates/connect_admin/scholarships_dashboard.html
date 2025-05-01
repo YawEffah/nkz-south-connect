@@ -1,0 +1,174 @@
+{% extends 'connect_admin/base.html' %}
+
+{% block nav-items %}
+<li class="nav-item">
+  <a class="nav-link" href="{% url 'connect_admin:dashboard' %}">
+    <i class="fa fa-home nav-icon"></i>Home</a>
+</li>
+<li class="nav-item">
+  <a class="nav-link" href="{% url 'connect_admin:news' %}">
+    <i class="fa fa-newspaper-o nav-icon"></i>News</a>
+</li>
+<li class="nav-item">
+  <a class="nav-link" href="{% url 'connect_admin:projects' %}">
+    <i class="fa fas fa-project-diagram nav-icon"></i>Projects</a>
+</li>
+<li class="nav-item">
+    <a class="nav-link" href="{% url 'connect_admin:members' %}">
+      <i class="fas fa-users nav-icon"></i>Members</a>
+</li>
+<li class="nav-item">
+    <a class="nav-link active" href="">
+        <i class="fas fa-project-diagram nav-icon"></i>Scholarships</a>
+</li>
+{% endblock %}
+
+{% block main-content %}
+<div class="main-help-wrap">
+  <div class="card-statistics-wrap">
+    <div class="card-stats-card">
+      <div class="card-header">
+        <h3 card="card-title">Local</h3>
+        <!-- <span><i class="fi fi-gh card-icon"></i></span> -->
+        <span><i class="fa fa-map-marker card-icon"></i></span>
+      </div>
+      <div class="card-body">
+        <h2>{{ local_scholarships }}</h2>
+      </div>
+    </div>
+    <div class="card-stats-card">
+      <div class="card-header">
+        <h3 card="card-title">Foreign</h3>
+        <span><i class="fa-solid fa-globe card-icon"></i></span>
+      </div>
+      <div class="card-body">
+        <h2>{{ foreign_scholarships }}</h2>
+      </div>
+    </div>
+    <div class="card-stats-card">
+      <div class="card-header">
+        <h3 card="card-title">Total</h3>
+        <span><i class="fa fa-calculator card-icon"></i></span>
+      </div>
+      <div class="card-body">
+        <h2>{{ total_scholarships }}</h2>
+      </div>
+    </div>
+  </div>
+  <br>
+<br>
+<div class="header-btn-wrap">
+  <button
+    type="button"
+    id="open-generate-card-modal"
+    class="cta-btn register-cta"
+  >
+    <i class="fa fa-plus"></i> Add Scholarship
+  </button>  
+  </div>
+
+  <!-- Add scholarship Modal -->
+  <div id="generateCardModal" class="custom-modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3>Add Scholarship</h3>
+        <div class="close-nav" id="close-modal">
+          <i class="fa fa-times close-icon"></i>
+        </div>
+      </div>
+      <div class="modal-body">
+        <form method="POST" enctype="multipart/form-data" novalidate class="text-start">
+          {% csrf_token %}
+          <div class="scholarship-form-content">
+            <div class="form-group">
+              {{ form.name.label_tag }}
+              {{ form.name }}
+              {{ form.name.errors}}
+            </div>
+            <div class="form-group-grid">
+              <div class="form-group">
+                {{ form.type.label_tag }}
+                {{ form.type }}
+                {{ form.type.errors}}
+              </div>
+              <div class="form-group">
+                {{ form.amount.label_tag }}
+                {{ form.amount }}
+                {{ form.amount.errors}}
+              </div>
+            </div>
+            <div class="form-group">
+              {{ form.description.label_tag }}
+              {{ form.description }}
+              {{ form.description.errors}}
+            </div>
+            <div class="form-group-grid">
+              <div class="form-group">
+                {{ form.recipient_name.label_tag }}
+                {{ form.recipient_name }}
+                {{ form.recipient_name.errors }}
+              </div>
+              <div class="form-group">
+                {{ form.recipient_id_number.label_tag }}
+                {{ form.recipient_id_number }}
+                {{ form.recipient_id_number.errors }}
+              </div>
+              <div class="form-group">
+                {{ form.recipient_phone.label_tag }}
+                {{ form.recipient_phone }}
+                {{ form.recipient_phone.errors }}
+              </div>
+              <div class="form-group">
+                {{ form.recipient_email.label_tag }}
+                {{ form.recipient_email }}
+                {{ form.recipient_email.errors }}
+              </div>
+            </div>
+          </div>
+          <input type="submit" value="Submit" class="cta-btn form-control">
+        </form>
+      </div>
+    </div>
+  </div>
+
+  
+  <br>
+  <h2 class="scroll-animation">Active scholarships</h2>
+  <div class="help-table-wrap custom-table-wrap">
+    <div class="info-row"></div>
+    <div class="table-scroll">
+      <table class="help-table custom-table">
+        <thead>
+          <tr>
+            <th>S/N</th>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Contact</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for scholarship in scholarships %}
+          <tr>
+            <td data-label="s-n">{{ forloop.counter }}</td>
+            <td data-label="Name">{{ scholarship.name }}</td>
+            <td data-label="Type">{{ scholarship.get_type_display }}</td>
+            <td data-label="Contact">{{ scholarship.recipient_name }}</td>
+            <td>
+              <a href="{% url 'connect_admin:delete_scholarship' scholarship.id %}" title="Delete" class="delete-tag view-btn action-btn" id="delete-scholarship-{{ scholarship.id }}"><i class="fa fa-trash"></i></a>
+                <a href="{% url 'connect_admin:edit_scholarship' scholarship.id %}" title="Edit" class="edit-tag view-btn action-btn"><i class="fa fa-edit action-icon"></i></a>
+                <a href="{% url 'connect_admin:scholarship_details' scholarship.id %}" title="View" class="view-btn action-btn"><i class="fa fa-eye action-icon"></i></a>
+            </td>
+          </tr>
+          {% empty %}
+          <tr>
+            <td colspan="4">No scholarship available</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

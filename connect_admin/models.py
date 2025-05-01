@@ -138,19 +138,19 @@ class Member(models.Model):
     def __str__(self):
         return self.name
 
-
-
 class Scholarship(models.Model):
+    name = models.CharField(max_length=500)
     type = models.CharField(choices=(
         ('local', 'Local'),
         ('foreign', 'Foreign')
     ), max_length=100)  
     amount = models.IntegerField()
     description = models.TextField()
-    reciepient_name = models.CharField(max_length=200)
-    reciepient_email = models.EmailField(max_length=200)
-    reciepient_phone = models.CharField(max_length=10)
+    recipient_name = models.CharField(max_length=200)
+    recipient_id_number = models.CharField(max_length=20, unique=True)
+    recipient_email = models.EmailField(max_length=200)
+    recipient_phone = models.CharField(max_length=10)
     date = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return self.reciepient_name + ' - ' + self.type
+        return self.recipient_name + ' - ' + self.type

@@ -5,7 +5,7 @@ from django.contrib import messages
 from django.utils import timezone
 from .models import *
 from django.contrib.auth.models import User
-from .forms import  NewsForm, LoginForm, ProjectForm, MemberForm
+from .forms import  NewsForm, LoginForm, ProjectForm, MemberForm, CommentForm, ScholarshipForm
 from django.db.models import Sum
 from django.db.models import Count, Q
 from django.contrib.auth.decorators import login_required
@@ -225,3 +225,70 @@ def delete_project(request, project_id):
     project.delete()
     messages.warning(request, 'Project deleted successfully')
     return redirect(reverse('connect_admin:projects'))
+
+
+
+
+@login_required
+def scholarship_dashboard(request):
+   
+    scholarships = Scholarship.objects.all()
+
+    # Perform aggregations for total scholarships
+    statistics = Scholarship.objects.aggregate(
+        total_scholarships=Count('id'),
+        foreign_scholarships=Count('id', filter=Q(type='foreign')),
+        local_scholarships=Count('id', filter=Q(type='local'))
+    )
+    if request.method == 'POST':
+        form = ScholarshipForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Scholarship added successfully')
+            return redirect(reverse('connect_admin:scholarships'))
+        else:
+            messages.error(request, 'An error occurred. Please try again')
+            return render(request, 'connect_admin/scholarships_dashboard.html', {
+                'form': form,
+                'scholarships': scholarships,
+                'total_scholarships': statistics['total_scholarships'],
+                'local_scholarships': statistics['local_scholarships'],
+                'foreign_scholarships': statistics['foreign_scholarships'],
+            })
+    else:
+        form = ScholarshipForm()
+
+    context = {
+        'form': form,
+        'scholarships': scholarships,
+        'total_scholarships': statistics['total_scholarships'],
+        'local_scholarships': statistics['local_scholarships'],
+        'foreign_scholarships': statistics['foreign_scholarships'],
+    }
+    return render(request, 'connect_admin/scholarships_dashboard.html', context)
+
+
+@login_required
+def scholarship_details(request, scholarship_id):
+    scholarship = get_object_or_404(Scholarship, pk=scholarship_id)
+    return render(request, 'connect_admin/scholarship_details.html', {'scholarship': scholarship})
+
+@login_required
+def edit_scholarship_view(request, scholarship_id):
+    scholarship = get_object_or_404(Scholarship, pk=scholarship_id)
+    if request.method == 'POST':
+        form = ScholarshipForm(request.POST, request.FILES, instance=scholarship)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Scholarship updated successfully!')
+            return redirect(reverse('connect_admin:members'))
+    else:
+        form = MemberForm(instance=scholarship)
+    return render(request, 'connect_admin/edit_scholarship.html', {'scholarship':scholarship, 'form': form})
+
+@login_required
+def delete_scholarship(request, scholarship_id):
+    scholarship = get_object_or_404(Scholarship, pk=scholarship_id)
+    scholarship.delete()
+    messages.warning(request, 'Scholarship deleted successfully')
+    return redirect(reverse('connect_admin:scholarships'))
