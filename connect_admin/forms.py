@@ -49,6 +49,16 @@ class MemberForm(forms.ModelForm):
             'email': forms.EmailInput(attrs={'class': 'inputField', 'placeholder': 'e.g. example@gmail.com'}),
         }
 
+        labels = {
+            'name': 'Full Name',
+            'date_of_birth': 'Date of Birth',
+            'contact': 'Contact Number',
+            'email': 'Email Address',
+            'type': 'Member Type',
+            'position': 'Position',
+            'picture': 'Profile Picture',
+        }
+
     def clean_contact(self):
         contact = self.cleaned_data.get('contact')
         if not contact.isdigit() or len(contact) != 10:
@@ -189,4 +199,15 @@ class ScholarshipForm(forms.ModelForm):
                 'class': 'inputField',
                 'placeholder': 'e.g. example@gmail.com'
             }),
+        }
+
+        labels = {
+            'name': 'Scholarship Name',
+            'type': 'Scholarship Type',
+            'amount': 'Scholarship Amount',
+            'description': 'Scholarship Description',
+            'recipient_name': 'Recipient Name',
+            'recipient_id_number': 'Recipient ID Number',
+            'recipient_phone': 'Recipient Phone Number',
+            'recipient_email': 'Recipient Email Address',
         }
