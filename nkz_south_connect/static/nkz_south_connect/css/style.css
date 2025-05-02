@@ -196,6 +196,15 @@ a{
     background: var(--accent-yellow);
 }
 
+.cancel-btn {
+    /* width: 100%; */
+    text-decoration: none;
+    text-align: center;
+    color: var(--accent-red);
+    background: #e5e4e4;
+    border: 1px solid var(--accent-red);
+}
+
 .heading{
     width: 300px;
     display: flex;
